@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RBC GENERATOR</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-image: linear-gradient(to right, #090979, #00d4ff);
+      }
+      #main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      .box {
+        padding: 20px;
+        width: 400px;
+      }
+
+      button {
+        background-color: blue;
+        color: white;
+        width: 120px;
+        padding: 15px 20px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+      }
+
+      #copyCode {
+        border: 2px solid white;
+        padding: 10px;
+        text-align: center;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div class="box">
+        <div class="btns">
+          <button id="btn1">#90979</button>
+          <button id="btn2">#00d4ff</button>
+        </div>
+        <div id="copyCode">
+          background-image: linear-gradient(to right, #090979 , #00d4ff)
+        </div>
+      </div>
+    </div>
+    <script>
+      const btn1 = document.querySelector("#btn1");
+      const btn2 = document.querySelector("#btn2");
+      const main = document.querySelector("#main");
+      const copyDiv = document.querySelector("#copyCode");
+
+      let color1 = "#090979";
+      let color2 = "#00d4ff";
+
+      const genColor = () => {
+        let hexa = "0123456789abcdef";
+        let colors = "#";
+        for (let i = 0; i < 6; i++) {
+          colors = colors + hexa[Math.floor(Math.random() * 16)];
+        }
+        return colors;
+      };
+
+      const handleClick1 = () => {
+        color1 = genColor();
+        document.body.style.backgroundImage = `linear-gradient(to right, ${color1}, ${color2})`;
+        btn1.innerHTML = color1;
+        copyDiv.innerHTML = `background-image: linear-gradient(to right, ${color1}, ${color2})`;
+        console.log(color1);
+      };
+
+      const handleClick2 = () => {
+        color2 = genColor();
+        btn2.innerHTML = color2;
+        document.body.style.backgroundImage = `linear-gradient(to right, ${color1}, ${color2})`;
+        copyDiv.innerHTML = `background-image: linear-gradient(to right, ${color1}, ${color2})`;
+        console.log(color2);
+      };
+
+      btn1.addEventListener("click", handleClick1);
+      btn2.addEventListener("click", handleClick2);
+      copyDiv.addEventListener("click", () => {
+        navigator.clipboard.writeText(copyDiv.innerHTML);
+        alert("Text Copied");
+      });
+    </script>
+  </body>
+</html>
